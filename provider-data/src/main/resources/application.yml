@@ -1,0 +1,59 @@
+server:
+  port: 8803
+
+spring:
+  application:
+    name: provider-data
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8801/eureka/
+  instance:
+    securePortEnabled: false
+    non-secure-port-enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+  file: log/providerdata.log
+
+
+---
+spring.profiles: dev
+spring:
+  task:
+    pool:
+      corePoolSize: 100
+      maxPoolSize: 500
+      keepAliveSeconds: 300
+      queueCapacity: 100
+  http:
+    multipart:
+      maxFileSize: 20Mb
+      maxRequestSize: 20Mb
+  datasource:
+    url: jdbc:postgresql://192.168.2.232:5432/carowner
+    username: postgres
+    password: 357159
+
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 1
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: discoverydata
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  thymeleaf:
+    cache: false

@@ -1,0 +1,77 @@
+buildscript {
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://repo1.maven.org/maven2/' }
+        mavenCentral()
+        jcenter()
+
+    }
+
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+
+    dependencies {
+
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.akhikhl.gretty:gretty:+'
+        classpath 'com.bmuschko:gradle-nexus-plugin:+'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:+'
+
+        classpath 'com.bmuschko:gradle-docker-plugin:2.5.1'
+    }
+
+}
+
+allprojects {
+
+    group 'cn.com.yxb.spring-cloud-demo'
+
+    apply from: "${rootDir}/gradle/configurations.gradle"
+
+    apply plugin: 'java'
+
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+
+    def cfg = ext.configs
+    def libs = ext.libraries
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+        maven { url 'http://repo1.maven.org/maven2/' }
+        mavenCentral()
+        jcenter()
+
+    }
+
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter:${libs.springBoot}"
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    }
+
+
+}
+
+configure(rootProject) {
+    description = 'The SpringCloud Demo Project.'
+
+    apply plugin: 'groovy'
+
+    def cfg = ext.configs
+    def libs = ext.libraries
+
+    task wrapper(type: Wrapper) {
+        group = 'build setup'
+        description = 'Generates gradlew[.bat] scripts.'
+
+        gradleVersion = "${libs.gradle}"
+        distributionUrl = "http://services.gradle.org/distributions/gradle-${libs.gradle}-all.zip"
+    }
+
+    // don't publish the default jar for the root project
+    configurations.archives.artifacts.clear()
+}

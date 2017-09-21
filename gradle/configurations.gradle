@@ -54,8 +54,9 @@ ext {
             undertow          : '1.4.7.Final',
 
             spring            : '4.3.5.RELEASE',
-            springBoot        : '1.4.3.RELEASE',
+            springBoot        : '1.5.3.RELEASE',
             springPlugin      : '1.2.0.RELEASE',
+            springCloudSr     : 'Brixton.SR5',
             springSession     : '1.3.0.RELEASE',
             springDataKeyValue: '1.1.5.RELEASE',
             springDataRedis   : '1.7.5.RELEASE',

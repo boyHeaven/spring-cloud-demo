@@ -1,4 +1,4 @@
-package cn.com.yxb.demo.eureka.service;
+package cn.com.yxb.demo.ribbon.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,9 @@ public class ClientService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // PROVIDER-DATA
-
     public String findByName(String name) {
-        return restTemplate.getForObject("http://PROVIDER-DATA/findByName?name=" + name, String.class);
+
+        return restTemplate.getForObject("http://CLIENT1/findByName?name=" + name, String.class);
     }
 
 }

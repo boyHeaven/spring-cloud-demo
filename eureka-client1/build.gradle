@@ -1,6 +1,7 @@
 dependencies {
 
 
+
 }
 
 mainClassName = 'cn.com.yxb.demo.eureka.EurekaClientApplication'

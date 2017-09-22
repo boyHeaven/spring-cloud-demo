@@ -1,5 +1,8 @@
 rootProject.name = 'spring-cloud-demo'
 include 'eureka-server'
-include 'eureka-client'
+include 'eureka-client1'
+include 'eureka-client2'
 include 'provider-data'
+include 'cloud-ribbon'
+include 'cloud-feign'
 

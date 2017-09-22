@@ -3,7 +3,7 @@ eureka:
     serviceUrl:
       defaultZone: http://discovery:8801/eureka/
 server:
-  port: 8802
+  port: 8804
 spring:
   application:
-    name: client
+    name: client1

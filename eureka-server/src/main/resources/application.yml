@@ -9,3 +9,32 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+#---
+#spring:
+#  profiles: discovery1
+#
+#server:
+#  port: 8801
+#
+#eureka:
+#  instance:
+#    hostname: discovery1
+#  client:
+#    serviceUrl:
+#      defaultZone: http://discovery2:8802/eureka/
+#
+#---
+#spring:
+#  profiles: discovery2
+#
+#server:
+#  port: 8802
+#
+#eureka:
+#  instance:
+#    hostname: discovery2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://discovery1:8801/eureka/

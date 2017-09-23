@@ -1,0 +1,13 @@
+server:
+  port: 8803
+
+spring:
+  application:
+    name: client1
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8801/eureka/

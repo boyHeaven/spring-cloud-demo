@@ -1,9 +1,21 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://discovery:8801/eureka/
 server:
   port: 8805
+
 spring:
   application:
     name: ribbon
+
+management.security.enabled: false
+
+# 配置默认路径info信息
+info:
+  component: ribbon demo
+
+eureka:
+  instance:
+   instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${server.port}
+   preferIpAddress: false
+
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8801/eureka/

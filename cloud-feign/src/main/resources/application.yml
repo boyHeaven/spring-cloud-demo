@@ -1,0 +1,19 @@
+server:
+  port: 8806
+
+spring:
+  application:
+    name: feign
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    serverUrl:
+      defaultZone: http://localhost:8801/eureka/
+
+management:
+  security:
+    enabled: false
+

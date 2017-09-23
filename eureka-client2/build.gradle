@@ -2,4 +2,4 @@ dependencies {
 
 }
 
-mainClassName = 'cn.com.yxb.demo.eureka.EurekaClientApplication'
+mainClassName = 'cn.com.yxb.demo.eureka.EurekaClientApplication2'

@@ -11,9 +11,6 @@ buildscript {
 
     ext {
         springBootVersion = '1.5.3.RELEASE'
-        gradleDockerVersion = '1.2'
-        dockerPluginVersion = '2.5.1'
-        springLoadVersion = '1.2.0.RELEASE'
         managementPluginVersion = '0.5.6.RELEASE'
     }
 
@@ -22,13 +19,7 @@ buildscript {
     dependencies {
 
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
 
-        classpath('org.akhikhl.gretty:gretty:+')
-        classpath('com.bmuschko:gradle-nexus-plugin:+')
-        classpath('com.github.ben-manes:gradle-versions-plugin:+')
-        classpath("com.bmuschko:gradle-docker-plugin:${dockerPluginVersion}")
-        classpath("org.springframework:springloaded:${springLoadVersion}")
         classpath("io.spring.gradle:dependency-management-plugin:${managementPluginVersion}")
     }
 
@@ -54,6 +45,10 @@ allprojects {
     def cfg = ext.configs
     def libs = ext.libraries
 
+    bootRun {
+        systemProperties = System.properties
+    }
+
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
         maven { url 'http://repo1.maven.org/maven2/' }
@@ -64,22 +59,30 @@ allprojects {
 
     }
 
-    dependencies {
 
-        compile fileTree(dir: 'libs', include: ['*.jar'])
-        compile("org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5")
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5"
+        }
+    }
+
+    dependencies {
 
         // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka-server
         compile("org.springframework.cloud:spring-cloud-starter-eureka-server:1.3.4.RELEASE")
 
         // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter
-        compile("org.springframework.cloud:spring-cloud-starter:1.2.3.RELEASE")
+        compile("org.springframework.cloud:spring-cloud-starter:1.3.0.M1")
+
+        compile("org.springframework.boot:spring-boot-starter-actuator:${libs.springBoot}")
 
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
         compile("org.springframework.boot:spring-boot-starter:${libs.springBoot}")
 
         compile("org.springframework.boot:spring-boot-starter-web:${libs.springBoot}")
 
+        testCompile("org.springframework.boot:spring-boot-starter-test:${libs.springBoot}")
         testCompile("junit:junit:${libs.junit}")
 
     }
